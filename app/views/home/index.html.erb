@@ -1,0 +1,42 @@
+<div class="col-md-8 col-md-offset-2">
+  <h1><strong>Welcome</strong></h1>
+  <p>Choose your room</p>
+
+  <ul>
+    <% @rooms.each do |room| %>
+      <li><%= room.name %> 
+      <span class="badge badge-primary"><%= room.messages.count %></span>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<%= form_for(@room) do |f| %>
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <%# <div class="panel-heading"></div> %>
+      <div class="panel-body">
+        <div class="form-group">
+          <%= f.label(:name) %>
+          <%= f.text_field(:name, class: 'form-control') %>
+        </div>   
+            
+      </div> 
+ <%#    </div>    %>   
+<%#   </div>  
+  <div class="col-md-8 col-md-offset-2"> %>
+    <div class="panel panel-default">
+      <%# <div class="panel-heading"></div> %>
+      <div class="panel-body"> 
+        <div class="form-group">
+          <p>  Username and first message</p>
+          <%= f.fields_for(:messages) do |field| %>
+            <%= field.text_field(:username, class: 'form-control', placeholder: "Username") %>
+             <%= field.text_field(:body, class: 'form-control', placeholder: "Your Message") %>
+          <% end %>
+        </div>
+         <%= f.submit(nil, class: 'btn btn-primary form-control') %> 
+      </div>
+     </div>
+     </div>
+   </div>
+<% end %>

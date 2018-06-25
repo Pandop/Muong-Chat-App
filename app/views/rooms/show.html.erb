@@ -1,0 +1,41 @@
+<div class="col-md-8 col-md-offset-2 messages">
+  <h1>Room: <%= @room.name %></h1>
+
+  <div class="list-group mb-3">
+    <% @messages.each do |message|%>
+      <%= render(@messages) %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-8 col-md-offset-2">
+
+  <div class="panel panel-default room-color">
+      <div class="panel-body">
+        <%# <form action="/room/123/messages" method="post"></form> %>
+
+        <%# <%= form_for(room_messages_path)  same as ..%>
+        <%# <%= form_for(@room, url: room_messages_path)  same as ..%> 
+        <%= form_for([@room, @message=Message.new(username: current_user)]) do |f|%> 
+          <div class="d-flex align-items-stretch">
+            <%= f.label(:body) %>
+            <%= f.text_field(:body, class:'mr-1', placeholder: "Type your message") %>
+            <%= f.label(:username) %>
+            <%= f.text_field(:username, class:'mr-1', placeholder: "username", required: true) %>
+          <%= f.submit('Message', class: 'btn btn-primary') %> 
+          </div>  
+        <% end %>
+      </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript" charset="utf-7">
+  function reload(){
+  $.get("<%= room_messages_path(@room, format: :js) %>", function(response){
+            //$(".messages").html(response);
+            //console.log("Run successfully ", response);
+  });
+}
+  setInterval(reload,3000);
+</script>
+
