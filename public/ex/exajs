@@ -1,0 +1,40 @@
+
+<%# <script type="text/javascript" charset="utf-7">
+ /*  function reload(){
+  $.get("<%= room_messages_path(@room, format: :js) %>", function(response){
+            //console.log("Run successfully ", response);
+  });  */ 
+
+/* function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     console.log("Run successfully ", this.responseText);
+    }
+  };
+  xhttp.open("GET", "<%= room_messages_path(@room, format: :js) %>", true);
+  xhttp.send();
+} /*
+
+/* fetch(action, {method: 'POST', body: body
+})
+.then((resp) => resp.json())
+.then(function (data) {
+console.log(data)
+})
+.catch(function (error) {
+console.log(error)
+}) */
+
+/* function loadDoc() {
+  Rails.ajax({url: "<%= room_messages_path(@room, format: :js) %>",type: "GET",
+    success: function(data) {
+      console.log("Success ...");
+    }
+  });
+
+} */
+
+  //setInterval(reload,3000);
+  //setInterval(loadDoc,3000);
+</script> %>

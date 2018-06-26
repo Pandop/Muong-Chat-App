@@ -7,8 +7,8 @@ class MessagesController < ApplicationController
     respond_to do |format|
       format.html 
       format.js
-    end
-    #render(layout: false)
+      format.json { render(json: @messages) }
+    end    #render(layout: false)
   end
 
   def create
@@ -19,11 +19,22 @@ class MessagesController < ApplicationController
     if @message.save
       unless current_user
         session[:username] = @message.username
+      end       #redirect_to(@room)
+    end
+    #else
+      #flash[:error] = "Error:#{@message.errors.full_messages.to_sentence}"
+      #redirect_to(room_path(@room))
+    #end
+    respond_to do |format|
+      format.html do 
+        if @message.persisted?
+          redirect_to(@room)
+        else
+          flash[:error] = "Error:#{@room.errors.full_messages.to_sentence}"
+          redirect_to(room_path)
+        end
       end
-      redirect_to(@room)
-    else
-      flash[:error] = "Error:#{@message.errors.full_messages.to_sentence}"
-      redirect_to(room_path(@room))
+      format.js
     end
   end
 

@@ -1,0 +1,30 @@
+ <%# var appendItem = {
+   init: function(){
+     $(".messages").append("<%= j render(@message) >");
+     $("input#message_body").val("");
+   }
+ }
+
+ appendItem.init();
+  %>
+var Create = {
+  init: function(){
+    var messages     = document.querySelector(".messages");
+    var message_body = document.querySelector("input#message_body");
+    messages.innerHTML += "<%= j render(@message) %>";
+    message_body.value = "";
+  },
+  reloadJSON: function(){
+    $.getJSON("<%= room_messages_path(@room, format: :json) %>", function(responseText){
+      console.log("ResponseText ", responseText);
+    });
+  },
+
+  success: function(){
+    console.log("Create done updating.."); 
+  }
+}
+
+Create.init();
+Create.success();
+Create.reloadJSON();

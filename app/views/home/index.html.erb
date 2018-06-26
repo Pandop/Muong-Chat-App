@@ -2,13 +2,13 @@
   <h1><strong>Welcome</strong></h1>
   <p>Choose your room</p>
 
-  <ul>
+  <ol>
     <% @rooms.each do |room| %>
-      <li><%= room.name %> 
+      <li><%= link_to(room.name, room_path(room)) %> 
       <span class="badge badge-primary"><%= room.messages.count %></span>
     </li>
     <% end %>
-  </ul>
+  </ol>
 </div>
 <%= form_for(@room) do |f| %>
   <div class="col-md-8 col-md-offset-2">
